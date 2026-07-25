@@ -1,8 +1,15 @@
+from lisa.models.ollama import OllamaModel
+
+
 class Chatbot:
-    """AI 챗봇 인터페이스의 기본 틀"""
+    """Ollama 기반 챗봇 인터페이스"""
 
     def __init__(self, model: str = "default") -> None:
         self.model = model
+        self._model_backend = OllamaModel(model=model if model != "default" else None)
 
     def respond(self, message: str) -> str:
-        return f"[{self.model}] {message}에 대한 답변"
+        try:
+            return self._model_backend.generate(message)
+        except Exception as exc:  # pragma: no cover - UI 안전장치
+            return f"Ollama 연결 오류: {exc}"

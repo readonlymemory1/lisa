@@ -1,7 +1,7 @@
 {
   "theme": "dark",
   "language": "ko",
-  "model": "ollama",
+  "model": "gemma3:4b",
   "api_key": "",
   "max_tokens": 2048,
   "temperature": 0.7,
